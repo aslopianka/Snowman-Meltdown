@@ -1,67 +1,25 @@
-import random
+"""Entry point for the Snowman Meltdown game."""
+from game_logic import play_game
 
+def main():
+    """Main function to run the Snowman Meltdown game loop with replay option."""
+    keep_playing = True
+    while keep_playing:
+        play_game()
+        print()
 
-WORDS = ["python", "git", "github", "snowman", "meltdown"]
+        while True:
+            response = input("Would you like to play again? (y/n): ").lower()
 
-# Snowman ASCII Art stages
-STAGES = {
-      0:
-     """
-      ___  
-     /___\\ 
-     (o o) 
-     ( : ) 
-     ( : ) 
-     """,
-      1:
-     """
-      ___  
-     /___\\ 
-     (o o) 
-     ( : ) 
-     """,
-      2:
-     """
-      ___  
-     /___\\ 
-     (o o) 
-     """,
-      3:
-     """
-      ___  
-     /___\\ 
-     """
-}
+            if response == "y":
+                break
 
+            if response == "n":
+                print("Good Bye!")
+                return
 
-def get_random_word():
-    """Selects a random word from the list."""
-    return WORDS[random.randint(0, len(WORDS) - 1)]
-
-
-def display_game_state(mistakes, secret_word, guessed_letters):
-    print(STAGES[mistakes])
-
-    for letter in secret_word:
-        if letter in guessed_letters:
-            print(letter, end=" ")
-        else:
-            print("_", end=" ")
-
-
-def play_game():
-    secret_word = get_random_word()
-    print("Welcome to Snowman Meltdown!")
-    print("Secret word selected: " + secret_word)
-
-    mistakes = 0
-    guessed_letters = []
-
-    guess = input("Guess a letter: ").lower()
-    guessed_letters.append(guess)
-
-    display_game_state(mistakes, secret_word, guessed_letters)
+            print("Invalid input. Please enter 'y' or 'n'.")
 
 
 if __name__ == "__main__":
-    play_game()
+    main()
